@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": ["es:*"],
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": ["<your IP>"]
+        }
+      },
+      "Resource": "arn:aws:es:eu-central-1:<your account id>:domain/alakazam/*"
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<your account id>:root"
+      },
+      "Action": "es:*",
+      "Resource": "arn:aws:es:eu-central-1:<your account id>:domain/alakazam/*"
+    }
+  ]
+}

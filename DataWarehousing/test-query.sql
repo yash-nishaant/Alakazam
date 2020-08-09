@@ -1,0 +1,1 @@
+SELECT description, count(*) from orderlog_schema.orderlogs_yashn where country='Germany' and year='2019' and month='02' group by description

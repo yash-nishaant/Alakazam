@@ -1,0 +1,37 @@
+{
+  "cloudwatch.emitMetrics": true,
+  "kinesis.endpoint": "kinesis.eu-central-1.amazonaws.com",
+  "firehose.endpoint": "kinesis.eu-central-1.amazonaws.com",
+
+  "flows": [
+    {
+      "filePattern": "/var/log/alakazam/*.log",
+      "kinesisStream": "AlakazamOrders",
+      "partitionKeyOption": "RANDOM",
+      "dataProcessingOptions": [
+        {
+          "optionName": "CSVTOJSON",
+          "customFieldNames": [
+            "InvoiceNo",
+            "StockCode",
+            "Description",
+            "Quantity",
+            "InvoiceDate",
+            "UnitPrice",
+            "Customer",
+            "Country"
+          ]
+        }
+      ]
+    },
+    {
+      "filePattern": "/var/log/alakazam/*.log",
+      "deliveryStream": "PurchaseLogs"
+    },
+    {
+      "filePattern": "/var/log/httpd/ssl_access*",
+      "deliveryStream": "WebLogs",
+      "initialPosition": "START_OF_FILE"
+    }
+  ]
+}
